@@ -29,7 +29,7 @@ public class FirestoreService {
     public static void setFirestore(){
         try {
             FileInputStream serviceAccount =
-                    new FileInputStream("./src/main/resources/serviceAccountKey.json");
+                    new FileInputStream("./src/main/resources/serviceAccount.json");
 
             FirebaseOptions options = FirebaseOptions.builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
