@@ -3,7 +3,9 @@ package com.example.application.views;
 
 import com.example.application.views.configuration.ConfigurationView;
 import com.example.application.views.helloworld.HelloWorldView;
+import com.vaadin.componentfactory.ToggleButton;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -16,136 +18,69 @@ import com.vaadin.flow.component.html.ListItem;
 import com.vaadin.flow.component.html.Nav;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.html.UnorderedList;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.tabs.Tab;
+import com.vaadin.flow.component.tabs.Tabs;
+import com.vaadin.flow.dom.ThemeList;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.theme.Theme;
+import com.vaadin.flow.theme.lumo.Lumo;
 
 /**
  * The main view is a top-level placeholder for other views.
  */
-@PWA(name = "HyC RFID Demos", shortName = "HyC RFID Demos", enableInstallPrompt = false)
-@Theme(themeFolder = "hycrfiddemos")
 @PageTitle("Main")
 public class MainLayout extends AppLayout {
 
-    /**
-     * A simple navigation item component, based on ListItem element.
-     */
-    public static class MenuItemInfo extends ListItem {
-
-        private final Class<? extends Component> view;
-
-        public MenuItemInfo(String menuTitle, String iconClass, Class<? extends Component> view) {
-            this.view = view;
-            RouterLink link = new RouterLink();
-            // Use Lumo classnames for various styling
-            link.addClassNames("flex", "mx-s", "p-s", "relative", "text-secondary");
-            link.setRoute(view);
-
-            Span text = new Span(menuTitle);
-            // Use Lumo classnames for various styling
-            text.addClassNames("font-medium", "text-s");
-
-            link.add(new LineAwesomeIcon(iconClass), text);
-            add(link);
-        }
-
-        public Class<?> getView() {
-            return view;
-        }
-
-        /**
-         * Simple wrapper to create icons using LineAwesome iconset. See
-         * https://icons8.com/line-awesome
-         */
-        @NpmPackage(value = "line-awesome", version = "1.3.0")
-        public static class LineAwesomeIcon extends Span {
-            public LineAwesomeIcon(String lineawesomeClassnames) {
-                // Use Lumo classnames for suitable font size and margin
-                addClassNames("me-s", "text-l");
-                if (!lineawesomeClassnames.isEmpty()) {
-                    addClassNames(lineawesomeClassnames);
-                }
-            }
-        }
-
-    }
-
-    private H1 viewTitle;
-
     public MainLayout() {
-        setPrimarySection(Section.DRAWER);
-        addToNavbar(true, createHeaderContent());
-        addToDrawer(createDrawerContent());
-    }
-
-    private Component createHeaderContent() {
         DrawerToggle toggle = new DrawerToggle();
-        toggle.addClassName("text-secondary");
-        toggle.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
-        toggle.getElement().setAttribute("aria-label", "Menu toggle");
 
-        viewTitle = new H1();
-        viewTitle.addClassNames("m-0", "text-l");
+        H1 title = new H1("HYC RFID CLOUD SOLUTIONS DEMO");
+        title.getStyle()
+                .set("font-size", "var(--lumo-font-size-l)")
+                .set("margin", "0");
 
-        Header header = new Header(toggle, viewTitle);
-        header.addClassNames("bg-base", "border-b", "border-contrast-10", "box-border", "flex", "h-xl", "items-center",
-                "w-full");
-        return header;
+        ToggleButton darkMode = new ToggleButton("Modo oscuro");
+        darkMode.addValueChangeListener(evt -> {
+            ThemeList themeList = UI.getCurrent().getElement().getThemeList();
+            if(evt.getValue()) themeList.add(Lumo.DARK);
+            else themeList.remove(Lumo.DARK);
+        });
+
+        darkMode.getElement().getStyle().set("margin-left", "auto");
+        darkMode.getElement().getStyle().set("margin-right", "20px");
+
+
+
+        Tab Menu = new Tab("Menu");
+        Menu.add(new Icon(VaadinIcon.ELLIPSIS_DOTS_H));
+        Tab helloWorld = new Tab("Hello World");
+        helloWorld.add(new Icon(VaadinIcon.BELL));
+        Tab Configuration = new Tab("Configuration");
+        Configuration.add(new Icon(VaadinIcon.SCREWDRIVER));
+        Tabs tabs = new Tabs(Menu, helloWorld, Configuration);
+        tabs.setOrientation(Tabs.Orientation.VERTICAL);
+        tabs.setAutoselect(false);
+
+        addToDrawer(tabs);
+        addToNavbar(toggle, title, darkMode);
+
+        tabs.addSelectedChangeListener(event -> navigator(tabs.getSelectedTab()));
     }
 
-    private Component createDrawerContent() {
-        H2 appName = new H2("HyC RFID Demos");
-        appName.addClassNames("flex", "items-center", "h-xl", "m-0", "px-m", "text-m");
-
-        com.vaadin.flow.component.html.Section section = new com.vaadin.flow.component.html.Section(appName,
-                createNavigation(), createFooter());
-        section.addClassNames("flex", "flex-col", "items-stretch", "max-h-full", "min-h-full");
-        return section;
-    }
-
-    private Nav createNavigation() {
-        Nav nav = new Nav();
-        nav.addClassNames("border-b", "border-contrast-10", "flex-grow", "overflow-auto");
-        nav.getElement().setAttribute("aria-labelledby", "views");
-
-        // Wrap the links in a list; improves accessibility
-        UnorderedList list = new UnorderedList();
-        list.addClassNames("list-none", "m-0", "p-0");
-        nav.add(list);
-
-        for (MenuItemInfo menuItem : createMenuItems()) {
-            list.add(menuItem);
-
+    public void navigator(Tab tabSelected) {
+        switch (tabSelected.getLabel()) {
+            case "Hello World":
+                UI.getCurrent().navigate("hello");
+                break;
+            case "Configuration":
+                UI.getCurrent().navigate("configuration");
+                break;
         }
-        return nav;
-    }
-
-    private MenuItemInfo[] createMenuItems() {
-        return new MenuItemInfo[]{ //
-                new MenuItemInfo("Hello World", "la la-globe", HelloWorldView.class), //
-
-                new MenuItemInfo("Configuration", "la la-haykal", ConfigurationView.class), //
-
-        };
-    }
-
-    private Footer createFooter() {
-        Footer layout = new Footer();
-        layout.addClassNames("flex", "items-center", "my-s", "px-m", "py-xs");
-
-        return layout;
-    }
-
-    @Override
-    protected void afterNavigation() {
-        super.afterNavigation();
-        viewTitle.setText(getCurrentPageTitle());
-    }
-
-    private String getCurrentPageTitle() {
-        PageTitle title = getContent().getClass().getAnnotation(PageTitle.class);
-        return title == null ? "" : title.value();
     }
 }
