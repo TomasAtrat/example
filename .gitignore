@@ -5,6 +5,7 @@
 .classpath
 
 src/main/resources/application.properties
+src/main/resources/hyc-rfid-cloud-solutions-demo-firebase-adminsdk-jmlnd-d2fed78ea3.json
 
 *.iml
 .DS_Store
