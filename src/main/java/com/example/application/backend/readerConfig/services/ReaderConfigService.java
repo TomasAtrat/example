@@ -1,7 +1,7 @@
-package com.example.application.readerConfig.services;
+package com.example.application.backend.readerConfig.services;
 
-import com.example.application.models.ReaderConfiguration;
-import com.example.application.readerConfig.mappers.ReaderMapper;
+import com.example.application.backend.models.ReaderConfiguration;
+import com.example.application.backend.readerConfig.mappers.ReaderMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

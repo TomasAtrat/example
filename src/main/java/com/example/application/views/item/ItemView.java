@@ -6,6 +6,6 @@ import com.vaadin.flow.router.PageTitle;
 @PageTitle("New item")
 public class ItemView extends VerticalLayout {
     public ItemView(){
-
+        
     }
 }

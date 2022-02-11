@@ -1,4 +1,4 @@
-package com.example.application.readerConfig.components;
+package com.example.application.backend.readerConfig.components;
 
 import com.impinj.octane.*;
 import org.springframework.stereotype.Component;

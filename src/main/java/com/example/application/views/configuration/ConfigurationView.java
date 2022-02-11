@@ -1,8 +1,8 @@
 package com.example.application.views.configuration;
 
-import com.example.application.models.ReaderConfiguration;
-import com.example.application.readerConfig.components.ReaderConfig;
-import com.example.application.readerConfig.services.ReaderConfigService;
+import com.example.application.backend.models.ReaderConfiguration;
+import com.example.application.backend.readerConfig.components.ReaderConfig;
+import com.example.application.backend.readerConfig.services.ReaderConfigService;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.html.H2;

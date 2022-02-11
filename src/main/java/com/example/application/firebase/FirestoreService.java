@@ -8,7 +8,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.cloud.FirestoreClient;
 
 import java.io.FileInputStream;
-import java.util.HashMap;
 import java.util.UUID;
 
 public class FirestoreService {

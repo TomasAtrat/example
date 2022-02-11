@@ -1,4 +1,4 @@
-package com.example.application.models;
+package com.example.application.backend.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

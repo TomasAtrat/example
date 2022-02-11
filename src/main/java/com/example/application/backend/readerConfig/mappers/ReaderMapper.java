@@ -1,6 +1,6 @@
-package com.example.application.readerConfig.mappers;
+package com.example.application.backend.readerConfig.mappers;
 
-import com.example.application.models.ReaderConfiguration;
+import com.example.application.backend.models.ReaderConfiguration;
 import org.apache.ibatis.annotations.*;
 
 import java.util.Optional;
