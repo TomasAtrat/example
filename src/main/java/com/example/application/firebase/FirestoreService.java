@@ -4,6 +4,7 @@ import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.Firestore;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.cloud.FirestoreClient;
 
 import java.io.FileInputStream;
@@ -21,8 +22,7 @@ public class FirestoreService {
     }
 
     public static FirestoreService getInstance(){
-        if(firestoreService == null)
-            firestoreService = new FirestoreService();
+        if(firestoreService == null) firestoreService = new FirestoreService();
         return firestoreService;
     }
 
@@ -37,6 +37,7 @@ public class FirestoreService {
 
             firebaseApp = FirebaseApp.initializeApp(options);
             firebaseDB = FirestoreClient.getFirestore();
+            FirebaseAuth auth = FirebaseAuth.getInstance();
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }

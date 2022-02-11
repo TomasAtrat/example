@@ -1,34 +1,17 @@
 package com.example.application.views;
 
 
-import com.example.application.views.configuration.ConfigurationView;
-import com.example.application.views.helloworld.HelloWorldView;
 import com.vaadin.componentfactory.ToggleButton;
-import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
-import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.dependency.NpmPackage;
-import com.vaadin.flow.component.html.Footer;
 import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.H2;
-import com.vaadin.flow.component.html.Header;
-import com.vaadin.flow.component.html.ListItem;
-import com.vaadin.flow.component.html.Nav;
-import com.vaadin.flow.component.html.Span;
-import com.vaadin.flow.component.html.UnorderedList;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
-import com.vaadin.flow.component.orderedlayout.FlexComponent;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.dom.ThemeList;
 import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.router.RouterLink;
-import com.vaadin.flow.server.PWA;
-import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
 
 /**
@@ -59,11 +42,11 @@ public class MainLayout extends AppLayout {
 
         Tab Menu = new Tab("Menu");
         Menu.add(new Icon(VaadinIcon.ELLIPSIS_DOTS_H));
-        Tab helloWorld = new Tab("Hello World");
-        helloWorld.add(new Icon(VaadinIcon.BELL));
-        Tab Configuration = new Tab("Configuration");
-        Configuration.add(new Icon(VaadinIcon.SCREWDRIVER));
-        Tabs tabs = new Tabs(Menu, helloWorld, Configuration);
+        Tab Configuration = new Tab("Configuración");
+        Configuration.add(new Icon(VaadinIcon.COG));
+        Tab newItem = new Tab("Nuevo elemento");
+        newItem.add(new Icon(VaadinIcon.PACKAGE));
+        Tabs tabs = new Tabs(Menu, Configuration, newItem);
         tabs.setOrientation(Tabs.Orientation.VERTICAL);
         tabs.setAutoselect(false);
 
@@ -75,11 +58,14 @@ public class MainLayout extends AppLayout {
 
     public void navigator(Tab tabSelected) {
         switch (tabSelected.getLabel()) {
-            case "Hello World":
-                UI.getCurrent().navigate("hello");
+            case "Menu":
+                UI.getCurrent().navigate("menu");
                 break;
-            case "Configuration":
+            case "Configuración":
                 UI.getCurrent().navigate("configuration");
+                break;
+            case "Nuevo elemento":
+                UI.getCurrent().navigate("items");
                 break;
         }
     }

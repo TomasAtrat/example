@@ -2,6 +2,7 @@ package com.example.application.views.login;
 
 import com.example.application.views.MainLayout;
 import com.example.application.views.configuration.ConfigurationView;
+import com.example.application.views.item.ItemView;
 import com.example.application.views.menu.MainView;
 import com.vaadin.flow.component.ClientCallable;
 import com.vaadin.flow.component.UI;
@@ -19,7 +20,6 @@ import com.vaadin.flow.server.VaadinService;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
 
-@CssImport("./lumo.css")
 @Theme(value = Lumo.class)
 @JsModule("./login.js")
 @JsModule("https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js")
@@ -52,7 +52,7 @@ public class LoginView extends VerticalLayout {
                 .setAttribute("mail", mail);
 
         routeSetter();
-        UI.getCurrent().navigate("Menu");
+        UI.getCurrent().navigate("menu");
     }
 
     @ClientCallable
@@ -65,11 +65,13 @@ public class LoginView extends VerticalLayout {
         routes = RouteConfiguration.forSessionScope();
         routes.removeRoute("menu");
         routes.removeRoute("configuration");
+        routes.removeRoute("items");
     }
 
     public void routeSetter() {
         routes.setRoute("menu", MainView.class, MainLayout.class);
         routes.setRoute("configuration", ConfigurationView.class, MainLayout.class);
+        routes.setRoute("items", ItemView.class, MainLayout.class);
     }
 
 }

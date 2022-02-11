@@ -6,12 +6,12 @@ var app;
 window.ns = {
 initApp: function(){
     const firebaseConfig = {
-      apiKey: "AIzaSyBQ02Tx7m3X_RZnnk7u0IN-TQ8kufxjrFU",
-      authDomain: "obligatorio-53b03.firebaseapp.com",
-      projectId: "obligatorio-53b03",
-      storageBucket: "obligatorio-53b03.appspot.com",
-      messagingSenderId: "424607021006",
-      appId: "1:424607021006:web:ebf1a49e85993fbeb0dd9f"
+    apiKey: "AIzaSyC5gl_nk72vgOq2qNt7lbBHhHEg4k6FtYI",
+      authDomain: "hyc-rfid-cloud-solutions-demo.firebaseapp.com",
+      projectId: "hyc-rfid-cloud-solutions-demo",
+      storageBucket: "hyc-rfid-cloud-solutions-demo.appspot.com",
+      messagingSenderId: "363534016061",
+      appId: "1:363534016061:web:57fa446e3e3d2eb5109454"
     };
 
     // Initialize Firebase
@@ -28,10 +28,12 @@ window.lg = {
          signInWithEmailAndPassword(auth, email, password).
                then((userCredential) => {
                  const user = userCredential.user;
+                 console.log("OK");
                  view.$server.loginOk(email);
                })
                .catch((error) => {
                  view.$server.loginError();
+                 console.log("ERROR");
                })
      },
  }

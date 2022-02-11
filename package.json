@@ -2,6 +2,7 @@
   "name": "no-name",
   "license": "UNLICENSED",
   "dependencies": {
+    "@firebase/auth": "^0.19.8",
     "@polymer/iron-a11y-announcer": "3.0.2",
     "@polymer/iron-a11y-keys-behavior": "3.0.1",
     "@polymer/iron-fit-behavior": "3.0.2",
@@ -67,6 +68,7 @@
     "@webcomponents/shadycss": "1.8.0",
     "@webcomponents/webcomponentsjs": "^2.2.10",
     "construct-style-sheets-polyfill": "3.0.4",
+    "firebase": "^9.6.6",
     "line-awesome": "1.3.0",
     "lit-element": "2.5.1",
     "lit-html": "1.4.1",
@@ -186,6 +188,6 @@
       "webpack-dev-server": "3.11.0",
       "webpack-merge": "4.2.2"
     },
-    "hash": "61125653124b7177ae769178202b0c8233c392fdfa2955008828bff62fe7fe20"
+    "hash": "76b008c688d2e66a180d647dc725d2dad31b76c51ea0a8e36e9e7c4510417b34"
   }
 }
