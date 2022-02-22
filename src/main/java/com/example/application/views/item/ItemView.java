@@ -16,7 +16,6 @@ import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.upload.Upload;
@@ -35,7 +34,7 @@ import static com.vaadin.flow.component.notification.Notification.Position.MIDDL
 public class ItemView extends VerticalLayout {
 
     private final ItemService itemService;
-    private ReaderConfigService readerConfigService;
+    private final ReaderConfigService readerConfigService;
     private TextField name;
     private TextField description;
     private TextArea information;
@@ -44,17 +43,10 @@ public class ItemView extends VerticalLayout {
     private Upload upload;
     private Image image;
     private ItemImage itemImage;
-    private RfidUseCase rfidUseCase;
 
     public ItemView(ItemService itemService, ReaderConfigService readerConfigService) {
         this.itemService = itemService;
         this.readerConfigService = readerConfigService;
-        /*try {
-            if (readerConfiguration == null) readerConfiguration = readerConfigService.getLastReader();
-            rfidUseCase.executeUseCase();
-        } catch (OctaneSdkException e) {
-            Notification.show(e.getMessage(), 5000, MIDDLE);
-        }*/
         add(new H2("Nuevo elemento etiquetado"));
         setJustifyContentMode(JustifyContentMode.START);
         setAlignItems(Alignment.BASELINE);
@@ -158,16 +150,12 @@ public class ItemView extends VerticalLayout {
     }
 
     private void clearFields() {
-        /*name.setValue("");
-        description.setValue("");
-        information.setValue("");
-        epc.setValue("");*/
         UI.getCurrent().getPage().reload();
     }
 
     @Override
     protected void onAttach(AttachEvent attachEvent) {
-        rfidUseCase = new ItemCreation(attachEvent.getUI(), this);
+        RfidUseCase rfidUseCase = new ItemCreation(attachEvent.getUI(), this);
         try {
             if (readerConfiguration == null) readerConfiguration = readerConfigService.getLastReader();
             rfidUseCase.executeUseCase();

@@ -4,14 +4,13 @@ import com.example.application.backend.common.RfidUseCase;
 import com.example.application.views.item.ItemView;
 import com.impinj.octane.*;
 import com.vaadin.flow.component.UI;
-import com.vaadin.flow.component.page.Push;
 
 import java.util.Arrays;
 
 public class ItemCreation extends RfidUseCase implements TagReportListener {
 
-    private UI ui;
-    private ItemView view;
+    private final UI ui;
+    private final ItemView view;
 
     public ItemCreation(UI ui, ItemView view) {
         this.ui = ui;
@@ -23,11 +22,6 @@ public class ItemCreation extends RfidUseCase implements TagReportListener {
     @Override
     protected void read() {
         reader.setTagReportListener(this);
-    }
-
-    @Override
-    protected void test() {
-        ui.access(() -> view.setEpc("This is an example EPC"));
     }
 
     @Override

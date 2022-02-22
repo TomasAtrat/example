@@ -8,7 +8,6 @@ import static com.example.application.utils.EnvironmentVariables.readerConfigura
 public abstract class RfidUseCase extends ReaderConfig {
 
     public void executeUseCase() throws OctaneSdkException { // TEMPLATE
-        test();
         connect(readerConfiguration.getHostname());
         configureReader();
         read();
@@ -16,8 +15,6 @@ public abstract class RfidUseCase extends ReaderConfig {
     }
 
     protected abstract void read();
-
-    protected abstract void test();
 
     protected abstract void configureReader() throws OctaneSdkException;
 }

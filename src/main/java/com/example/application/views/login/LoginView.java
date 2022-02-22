@@ -4,10 +4,10 @@ import com.example.application.views.MainLayout;
 import com.example.application.views.configuration.ConfigurationView;
 import com.example.application.views.item.ItemView;
 import com.example.application.views.menu.MainView;
+import com.example.application.views.smartShelf.SmartShelfView;
 import com.vaadin.flow.component.ClientCallable;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -66,12 +66,14 @@ public class LoginView extends VerticalLayout {
         routes.removeRoute("menu");
         routes.removeRoute("configuration");
         routes.removeRoute("items");
+        routes.removeRoute("smartShelf");
     }
 
     public void routeSetter() {
         routes.setRoute("menu", MainView.class, MainLayout.class);
         routes.setRoute("configuration", ConfigurationView.class, MainLayout.class);
         routes.setRoute("items", ItemView.class, MainLayout.class);
+        routes.setRoute("smartShelf", SmartShelfView.class, MainLayout.class);
     }
 
 }

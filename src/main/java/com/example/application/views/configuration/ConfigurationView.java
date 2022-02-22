@@ -103,6 +103,7 @@ public class ConfigurationView extends VerticalLayout {
         try {
             ReaderConfig readerConfig = new ReaderConfig();
             readerConfig.connect(hostname);
+            readerConfig.disconnect();
             readerConfiguration.setConnected(true);
             Notification.show("El lector se ha conectado correctamente.", 5000, MIDDLE);
         } catch (Exception e) {
