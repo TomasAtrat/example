@@ -169,7 +169,8 @@ public class ConfigurationView extends VerticalLayout {
             items.add(-i);
         }
         powerOptions.setItems(items);
-
+        powerOptions.setEmptySelectionAllowed(true);
+        powerOptions.setEmptySelectionCaption("Valor por defecto");
     }
 
     private void setRssiSelect() {
@@ -180,5 +181,7 @@ public class ConfigurationView extends VerticalLayout {
             items.add(-i);
         }
         rssiOptions.setItems(items);
+        rssiOptions.setEmptySelectionAllowed(true);
+        rssiOptions.setEmptySelectionCaption("Valor por defecto");
     }
 }

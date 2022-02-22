@@ -10,7 +10,7 @@ public class ReaderConfig {
         reader = new ImpinjReader();
     }
 
-    private final ImpinjReader reader;
+    protected final ImpinjReader reader;
 
     public void connect(String hostname) throws OctaneSdkException {
         reader.connect(hostname);
